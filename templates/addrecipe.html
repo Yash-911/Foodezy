@@ -1,0 +1,310 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Add Recipe</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/noui/nouislider.min.css' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'CSS/util.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'CSS/main.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/new_index_css.css' %}" />
+<!--===============================================================================================-->
+</head>
+<body>
+
+    <!--Navbar-->
+      <nav class="navbar navbar-expand-lg">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+
+            <li class="nav-item active">
+                <a class="nav-link" href="/newfunc">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="modal" data-target="#exampleModalLong" href="/add_recipe/addrecipe">Add Recipe</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/add_recipe/viewrecipe">View Items</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/add_recipe/view_cart">Cart  {{ cart_obj.count }}</a>
+            </li>
+        </ul>
+        </div>
+        <form class="form-inline my-2 my-lg-0" action="/add_recipe/search" method="post">
+            {% csrf_token %}
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="recipe_name">
+            <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search">
+        </form>
+          {% if user.is_authenticated %}
+            <form class="form-inline my-2 my-lg-0">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Hello, {{ user.first_name }}</button>
+            </form>
+            <form class="form-inline my-2 my-lg-0">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="/accounts/logout">Logout</a></button>
+            </form>
+          {% else %}
+            <form class="form-inline my-2 my-lg-0">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="accounts/register">Register</a></button>
+            </form>
+            <form class="form-inline my-2 my-lg-0">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="accounts/login">Login</a></button>
+            </form>
+          {% endif %}
+    </nav>
+
+
+	<div class="container-contact100" style="background-color: black">
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form" method="POST" action="add_submitted_recipe" style="color: orangered">
+
+                {% csrf_token %}
+
+				<span class="contact100-form-title" style="color: orangered">
+					Add Recipe
+				</span>
+
+
+				<div class="wrap-input100 validate-input bg1" data-validate="Please Type Your Name">
+					<span class="label-input100" style="color: orangered">Recipe Name *</span>
+					<input class="input100" type="text" name="recipe" placeholder="Enter Your Name">
+				</div>
+
+				<div class="wrap-input100 validate-input bg1" data-validate="Please Insert Image">
+					<span class="label-input100" style="color: orangered">Add Image *</span>
+					<input class="input100" type="file" name="image" placeholder="" accept="image/*">
+				</div>
+
+				<div class="wrap-input100 input100-select bg1">
+					<span class="label-input100" style="color: orangered">Select Cuisine *</span>
+					<div>
+						<select class="js-select2" name="service">
+							<option value="Italian" style="color: orangered"> Italian</option>
+							<option value="Mexican" style="color: orangered"> Mexican</option>
+							<option value="South Indian" style="color: orangered"> South Indian</option>
+							<option value="North Indian" style="color: orangered"> North Indian</option>
+							<option value="Gujarati" style="color: orangered"> Gujarati</option>
+							<option value="Thai" style="color: orangered"> Thai</option>
+							<option value="Chinese" style="color: orangered"> Chinese</option>
+						</select>
+						<div class="dropDownSelect2"></div>
+					</div>
+				</div>
+
+				<div class="w-full dis-none js-show-service">
+					<div class="wrap-contact100-form-radio">
+						<span class="label-input100">Category to which your recipe belongs</span>
+
+						<div class="contact100-form-radio m-t-15">
+							<input class="input-radio100" id="radio1" type="radio" name="type-product" value="Breakfast" checked="checked">
+							<label class="label-radio100" for="radio1" style="color: orangered">
+								Breakfast
+							</label>
+						</div>
+
+						<div class="contact100-form-radio">
+							<input class="input-radio100" id="radio2" type="radio" name="type-product" value="Brunch">
+							<label class="label-radio100" for="radio2" style="color: orangered">
+								Brunch
+							</label>
+						</div>
+
+						<div class="contact100-form-radio">
+							<input class="input-radio100" id="radio3" type="radio" name="type-product" value="Lunch">
+							<label class="label-radio100" for="radio3" style="color: orangered">
+								Lunch
+							</label>
+						</div>
+
+						<div class="contact100-form-radio">
+							<input class="input-radio100" id="radio4" type="radio" name="type-product" value="Snacks">
+							<label class="label-radio100" for="radio4" style="color: orangered">
+								Snacks
+							</label>
+						</div>
+
+						<div class="contact100-form-radio">
+							<input class="input-radio100" id="radio5" type="radio" name="type-product" value="Dinner">
+							<label class="label-radio100" for="radio5" style="color: orangered">
+								Dinner
+							</label>
+						</div>
+
+						<div class="contact100-form-radio">
+							<input class="input-radio100" id="radio6" type="radio" name="type-product" value="Dessert">
+							<label class="label-radio100" for="radio6" style="color: orangered">
+								Dessert
+							</label>
+						</div>
+
+					</div>
+
+					<div class="wrap-contact100-form-range">
+						<span class="label-input100">Approx Ingredient Cost *</span>
+
+						<div class="contact100-form-range-value" style="color: orangered">
+							Rs <span id="value-lower" >100</span> - Rs <span id="value-upper">1000</span>
+							<input type="text" name="from-value">
+							<input type="text" name="to-value">
+						</div>
+
+						<div class="contact100-form-range-bar">
+							<div id="filter-bar"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="wrap-input100 validate-input bg0 rs1-alert-validate" data-validate = "Please Enter Your Ingredients"
+                     style="height:300px">
+					<span class="label-input100">Ingredients</span>
+					<textarea class="input100" name="Ingredients" placeholder="Your Ingredients Please..."></textarea>
+				</div>
+
+				<div class="wrap-input100 validate-input bg0 rs1-alert-validate" data-validate = "Please Enter Your Recipe" style="height: 300px;">
+					<span class="label-input100">Recipe</span>
+					<textarea class="input100" name="Recipe" placeholder="Your Recipe Please..."></textarea>
+				</div>
+
+				<div class="wrap-input100 validate-input bg0 rs1-alert-validate" data-validate = "Please Type Your Message">
+					<span class="label-input100">Note</span>
+					<textarea class="input100" name="message" placeholder="Your message here..."></textarea>
+				</div>
+
+				<div class="container-contact100-form-btn">
+						<span>
+							<input class="contact100-form-btn" type="Submit" value="Submit">
+						</span>
+				</div>
+
+                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Important</h5>
+                      </div>
+                      <div class="modal-body">
+                        Your recipe will be withheld for 24 hours before uploading on Feastify Global Market. <br><br>
+                        Due to security reasons, your recipe will be scanned for inappropriate contents/reference which upon finding none will be posted. An email will be sent regarding the same upon successful completion. <br><br>
+                        If any inappropriate content is found, the recipe will be taken down and the account will be temporarily suspended. The account holder will be contacted for further questioning after which Feastify will decide whether to uplift the ban.
+                        <br><br>
+                        Thank you for using Feastify!
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel Upload</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Agree</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+			</form>
+		</div>
+	</div>
+
+
+
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+
+
+			$(".js-select2").each(function(){
+				$(this).on('select2:close', function (e){
+					if($(this).val() == "Please chooses") {
+						$('.js-show-service').slideUp();
+					}
+					else {
+						$('.js-show-service').slideUp();
+						$('.js-show-service').slideDown();
+					}
+				});
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/noui/nouislider.min.js' %}"></script>
+	<script>
+	    var filterBar = document.getElementById('filter-bar');
+
+	    noUiSlider.create(filterBar, {
+	        start: [ 100, 1000 ],
+	        connect: true,
+	        range: {
+	            'min': 100,
+	            'max': 1000
+	        }
+	    });
+
+	    var skipValues = [
+	    document.getElementById('value-lower'),
+	    document.getElementById('value-upper')
+	    ];
+
+	    filterBar.noUiSlider.on('update', function( values, handle ) {
+	        skipValues[handle].innerHTML = Math.round(values[handle]);
+	        $('.contact100-form-range-value input[name="from-value"]').val($('#value-lower').html());
+	        $('.contact100-form-range-value input[name="to-value"]').val($('#value-upper').html());
+	    });
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static 'js/main.js' %}"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+</body>
+</html>

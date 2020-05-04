@@ -1,0 +1,166 @@
+/* Basic Styling */
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+    background-color: black;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px;
+  display: flex;
+  margin-top: 100px;
+}
+
+/* Columns */
+.left-column {
+  width: 65%;
+  position: relative;
+}
+
+.right-column {
+  margin-left: 50px;
+  width: 35%;
+  margin-top: 60px;
+  margin-bottom: 50px;
+}
+
+
+/* Left Column */
+.left-column img {
+    border-radius: 10%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.left-column img.active {
+  opacity: 1;
+}
+
+
+/* Right Column */
+
+/* Product Description */
+.product-description {
+  margin-bottom: 50px;
+}
+.product-description span {
+  font-size: 12px;
+  color: orangered;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.product-description h1 {
+  font-weight: 300;
+  font-size: 52px;
+  color: blanchedalmond;
+  letter-spacing: -2px;
+}
+.product-description p {
+  font-size: 16px;
+  font-weight: 300;
+  color: blanchedalmond;
+  line-height: 24px;
+}
+
+/* Product Configuration */
+.product-color span,
+.cable-config span {
+  font-size: 14px;
+  font-weight: 400;
+  color: blanchedalmond;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+/* Product Price */
+.product-price {
+  display: flex;
+  align-items: center;
+}
+
+.product-price span {
+  font-size: 26px;
+  font-weight: 300;
+  color: blanchedalmond;
+  margin-right: 20px;
+}
+
+.cart-btn {
+  display: inline-block;
+  background-color: orangered;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #FFFFFF;
+  text-decoration: none;
+  padding: 12px 30px;
+  transition: all .5s;
+}
+.cart-btn:hover {
+  background-color: black;
+  color: orangered;
+}
+
+/* Responsive */
+@media (max-width: 940px) {
+  .container {
+    flex-direction: column;
+    margin-top: 60px;
+  }
+
+  .left-column,
+  .right-column {
+    width: 100%;
+  }
+
+  .left-column img {
+    width: 300px;
+    right: 0;
+    top: -65px;
+    left: initial;
+  }
+}
+
+@media (max-width: 535px) {
+  .left-column img {
+    width: 220px;
+    top: -85px;
+  }
+}
+p{
+    color: blanchedalmond;
+}
+a{
+    background-color: orangered;
+    color: black;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+a:hover{
+  background-color: black;
+  color: white;
+}
+h4{
+    color: gray;
+}
+li{
+  text-align: center ;
+  vertical-align: center;
+  margin-left: 5%;
+}
+btn-outline-danger:hover{
+  border: 2px solid black;
+  background-color: orangered;
+  color: white;
+}
+.tab-pane{
+  text-align: center;
+}

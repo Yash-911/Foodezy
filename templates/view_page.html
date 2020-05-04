@@ -1,0 +1,158 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% for items in items %}
+    <title>{{ items.recipe_name }}</title>
+    {% endfor %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/view_css.css' %}" />
+    <style>
+        .nav-link{
+            background-color: black;
+            color: white;
+            display: block;
+        }
+        .my-2{
+            color: whitesmoke;
+        }
+        .my-2:hover{
+            color: orangered;
+        }
+        .btn-2:hover{
+            background-color: orangered;
+            color: white;
+        }
+        a:hover{
+            text-decoration: none;
+            color: orangered;
+        }
+    </style>
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+
+            <li class="nav-item active">
+                <a class="btn my-2 my-sm-0" href="/newfunc">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="btn my-2 my-sm-0"  href="/add_recipe/addrecipe">Add&nbspRecipe</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn my-2 my-sm-0" href="/add_recipe/viewrecipe">View&nbspItems</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn my-2 my-sm-0" href="/add_recipe/view_cart">Cart {{ cart_obj.count }}</a>
+            </li>
+        </ul>
+        </div>
+        <form class="form-inline my-2 my-lg-0" action="/add_recipe/search" method="post">
+            {% csrf_token %}
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="recipe_name">
+            <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search">
+        </form>
+          {% if user.is_authenticated %}
+            <form class="form-inline my-2 my-lg-0">
+                <button class="btn my-2 my-sm-0" type="submit">Hello, {{ user.first_name }}</button>
+            </form>
+            <form class="form-inline my-2 my-lg-0">
+                <button class="btn my-2 my-sm-0" type="submit"><a style="background-color: black; color: white" href="/accounts/logout">Logout</a></button>
+            </form>
+          {% else %}
+            <form class="form-inline my-2 my-lg-0">
+                <button class="btn my-2 my-sm-0" type="submit"><a href="accounts/register">Register</a></button>
+            </form>
+            <form class="form-inline my-2 my-lg-0">
+                <button class="btn my-2 my-sm-0" type="submit"><a href="accounts/login">Login</a></button>
+            </form>
+          {% endif %}
+    </nav>
+
+
+{% for items in items %}
+<main class="container">
+
+        <div class="left-column">
+          <img data-image="red" class="active" src="{{ items.image.url }}" alt="">
+        </div>
+
+
+        <!-- Right Column -->
+        <div class="right-column" >
+
+          <!-- Product Description -->
+          <div class="product-description">
+            <span>{{ items.cuisine }}</span>
+            <h1>{{ items.recipe_name }}</h1>
+          </div>
+
+         <ul class="nav">
+              <li class="active" style="border:black"><a class="btn btn-2" data-toggle="tab" href="#home" style=" color: white;">
+                  Information</a>
+              </li>&nbsp&nbsp
+
+              <li><a class="btn btn-2" data-toggle="tab" href="#menu1" style=" color: white">
+                  Ingredients
+              </a></li>&nbsp&nbsp
+
+              <li><a class="btn btn-2" data-toggle="tab" href="#menu2" style=" color: white">Recipe</a></li>
+            </ul>
+
+            <div class="tab-content" >
+              <br>
+              <div id="home" class="tab-pane fade in active">
+                <h4>Information</h4>
+                <p>Recipe Information/Details from Provider</p>
+              </div>
+              <div id="menu1" class="tab-pane fade">
+                <h4>Ingredients</h4>
+                <p>{{ items.ingredients }}</p>
+              </div>
+              <div id="menu2" class="tab-pane fade">
+                <h4>Recipe</h4>
+                <p>{{ items.recipe }}</p>
+              </div>
+            </div>
+          <br>
+          <br>
+          <br>
+          <!-- Product Configuration -->
+          <div class="product-configuration">
+
+          <!-- Product Pricing -->
+          <div class="product-price">
+            {% if items.recipe_name in cart_items  %}
+                <a class="btn" disabled style="color:gray;">Added to cart</a>
+            {% else %}
+                <a href="/add_recipe/add_cart/{{ items.recipe_name }}" class="cart-btn" style="margin-left: auto; margin-right: auto">Add to cart</a>
+            {% endif %}
+            &nbsp&nbsp&nbsp
+            <a href="/add_recipe/viewrecipe" class="cart-btn" style="margin-left: auto; margin-right: auto">Back</a>
+          </div>
+              <p></p>
+              <p></p>
+              <p></p>
+        </div>
+        </div>
+
+</main>
+{% endfor %}
+      <!-- Scripts -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
+      <script src="{% static 'js/index_js/script.js' %}" charset="utf-8"></script>
+    </body>
+</html>

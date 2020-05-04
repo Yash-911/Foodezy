@@ -1,0 +1,113 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+html, body{
+    font-weight: 800;
+    width: auto;
+    height: auto;
+    background-size: cover;
+    background-position: center ;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    -webkit-flex: auto;
+    -ms-flex: auto;
+    flex: auto;
+}
+.navbar{
+    height: 4rem;
+    /*background-attachment: fixed;*/
+    margin-left: auto;
+    margin-right: auto;
+    background-color: black;
+    -webkit-flex: auto;
+    -ms-flex: auto;
+    flex: auto;
+}
+.nav-link:hover {
+  color: #F0542C;
+}
+.nav-link{
+    color: blanchedalmond;
+    text-align: left;
+    font-size: large;
+    margin-left: 35px;
+    margin-right: 12px;
+    -webkit-flex: auto;
+    -ms-flex: auto;
+    flex: auto;
+}
+.btn{
+    color: blanchedalmond;
+    background-color: black;
+    border-color: black;
+    -webkit-flex: auto;
+    -ms-flex: auto;
+    flex: auto;
+}
+
+.c1{
+    margin: auto;
+    margin-top: 11%;
+    -webkit-flex: auto;
+    -ms-flex: auto;
+    flex: auto;
+    position: center;
+    width: fit-content;
+    height: 30%;
+}
+
+svg {
+    display: block;
+    font: 7.5em 'Montserrat';
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    -webkit-flex: auto;
+    -ms-flex: auto;
+    flex: auto;
+}
+.text-copy {
+    fill: none;
+    stroke: white;
+    stroke-dasharray: 6% 29%;
+    stroke-width: 5px;
+    stroke-dashoffset: 0%;
+    animation: stroke-offset 5.8s infinite linear;
+    -webkit-flex: auto;
+    -ms-flex: auto;
+    flex: auto;
+}
+
+.text-copy:nth-child(1){
+	stroke: white;
+	animation-delay: -1s;
+}
+
+.text-copy:nth-child(2){
+	stroke: #01C0c8;
+	animation-delay: -2s;
+}
+
+.text-copy:nth-child(3){
+	stroke: #e3fc06;
+	animation-delay: -3s;
+}
+
+.text-copy:nth-child(4){
+	stroke: rgb(26, 170, 57);
+	animation-delay: -4s;
+}
+
+.text-copy:nth-child(5){
+	stroke: rgb(157, 19, 211);
+	animation-delay: -5s;
+}
+
+@keyframes stroke-offset{
+	100% {stroke-dashoffset: -35%;}
+}
+.slider_bg_1{
+    background-image: url(rutvik.png);
+}
+.slider_bg_2{
+    background-image: url(banner.png);
+}

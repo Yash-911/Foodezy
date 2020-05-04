@@ -1,0 +1,65 @@
+{% load static from staticfiles %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/register_css.css' %}" />
+    <title>Login</title>
+    <style>
+        .btn:hover{
+            background-color: orangered;
+        }
+        .btn-2:hover{
+            border-color: orangered;
+        }
+        .btn-2{
+            border: 0px solid black;
+            border-radius: 10px;
+            margin-top: 5%;
+        }
+    </style>
+</head>
+<body>
+    <div class="user" style="margin-top: 8%">
+    <header class="user__header">
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3219/logo.svg" alt="" />
+        <h1 class="user__title">Freaky Fast, Freaky Good</h1>
+    </header>
+    </div>
+    <h3 style="color: white; text-align: center" >Invalid Login Credentials</h3>
+    <div class="container" style="width: 32%;">
+    <form action="login" method="POST" class="form" style="border: 3px solid red">
+       {% csrf_token %}
+        <div class="form__group" >
+       <input type="text" name="username" placeholder="User Name" class="form__input">
+        </div>
+        <div class="form__group">
+       <input type="password" name="password" placeholder="Password" class="form__input">
+        </div>
+       <input type="Submit" class="btn" value="Sign In">
+
+    </form>
+        <a href="/accounts/password-reset" ><input type="submit" class="btn btn-2" value="Forgot Password"></a>
+    </div>
+    <div>
+    </div>
+</body>
+</html>

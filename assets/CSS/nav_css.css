@@ -1,0 +1,29 @@
+.navbar{
+    margin-bottom: 20px;
+    height: 4rem;
+    background-attachment: fixed;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: black;
+    -webkit-flex: auto;
+    -ms-flex: auto;
+    flex: auto;
+}
+.nav-link{
+    color: blanchedalmond;
+    text-align: left;
+    font-size: large;
+    margin-left: 35px;
+    margin-right: 12px;
+    -webkit-flex: auto;
+    -ms-flex: auto;
+    flex: auto;
+}
+.btn{
+    color: blanchedalmond;
+    background-color: black;
+    border-color: black;
+    -webkit-flex: auto;
+    -ms-flex: auto;
+    flex: auto;
+}

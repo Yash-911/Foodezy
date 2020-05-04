@@ -1,0 +1,44 @@
+@media (min-width: 700px) {
+  .dr-breakout-btn {
+    display: none;
+  }
+  .dr-breakout {
+    display: inline;
+    background: transparent;
+    box-shadow:none;
+    border:none;
+    position: relative;
+    margin:0;
+  }
+  .dr-breakout li {
+    display:inline;
+  }
+  .dr-breakout li a:hover{
+      color: #FFFFFF;
+      background-color: #F0542C;
+      border: 2px solid #ffffff;
+      border-radius: 10px;
+  }
+  .dr-breakout li a {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    vertical-align: middle;
+    border: 2px solid #F0542C;
+    color: #F0542C;
+    background-color: #000000;
+    border-radius: 10px;
+  }
+}
+
+body {
+  background-color:#83a5b4;
+}
+.btn-group {
+  left: 30%;
+  margin: 50px 0;
+}

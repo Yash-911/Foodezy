@@ -1,0 +1,22 @@
+.scrollmenu {
+    background-color: black;
+    -ms-overflow-style: none;
+    overflow: auto;
+    white-space: nowrap;
+}
+.card {
+    background-color: black;
+    border-radius: 5%;
+    border-width: thin;
+    border-color: black;
+    display: inline-block;
+    color: orangered;
+    text-align: center;
+    margin: 30px;
+    padding: 15px;
+    text-decoration: none;
+}
+.card-img-top{
+    border-radius: 5%;
+    background-color: black;
+}
